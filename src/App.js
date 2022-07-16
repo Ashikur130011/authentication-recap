@@ -6,21 +6,29 @@ import About from './components/About/About';
 import Login from './components/Login/Login';
 import Header from './components/Header/Header';
 import AuthProvider from './context/AuthProvider';
+import ProtectedRoute from './components/PrivateRoute/ProtectedRoute';
 
 function App() {
   return (
       <div className="App">
-              <BrowserRouter>
-          <AuthProvider>
+          <BrowserRouter>
+              <AuthProvider>
                   <Header></Header>
                   <Routes>
                       <Route path="/" element={<Home />} />
-                      <Route path="home" element={<Home />} />
-                      <Route path="about" element={<About />} />
-                      <Route path="login" element={<Login />} />
+                      <Route path="/home" element={<Home />} />
+                      <Route
+                          path="/about"
+                          element={
+                              <ProtectedRoute>
+                                  <About />
+                              </ProtectedRoute>
+                          }
+                      />
+                      <Route path="/login" element={<Login />} />
                   </Routes>
-          </AuthProvider>
-              </BrowserRouter>
+              </AuthProvider>
+          </BrowserRouter>
       </div>
   );
 }
