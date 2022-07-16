@@ -1,13 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import useFirebase from '../../hook/useFirebase';
-
+import useAuth from '../../hook/UseAuth';
 const Header = () => {
-    const{user, logOut} = useFirebase()
-    const handleLogOut = () => {
-        logOut()
-        console.log("Clicked");
-    }
+    const{user, logOut} = useAuth()
+    
     return (
         <div>
             <NavLink to="home">Home </NavLink>
@@ -15,7 +11,7 @@ const Header = () => {
             <NavLink to="login"> Login </NavLink>
             
             <span> {user.displayName} </span>
-            {user.email && <button onClick={handleLogOut}>Log Out</button>}
+            {user.email && <button onClick={logOut}>Log Out</button>}
         </div>
     );
 };
